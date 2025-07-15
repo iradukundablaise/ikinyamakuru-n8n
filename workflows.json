@@ -1,0 +1,643 @@
+{
+  "name": "Ikinyamakuru",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -280,
+        -40
+      ],
+      "id": "974a7fa6-e031-434d-bf39-08ed7cddcee6",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.API_BASE_URL }}/api/articles?limit=100",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apiKey",
+              "value": "={{ $json.API_KEY }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        300,
+        220
+      ],
+      "id": "ed91f057-8f34-4ebf-a16e-15300eed79c6",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "url": "https://umuseke.rw/wp-json/wp/v2/posts?per_page=100",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        540,
+        -220
+      ],
+      "id": "cf3d23fe-e1af-4d9f-a70b-8c4bb94cf927",
+      "name": "Scrap umuseke"
+    },
+    {
+      "parameters": {
+        "url": "https://inyarwanda.com/config/env",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        60,
+        220
+      ],
+      "id": "35abce49-dc7d-4c21-b6d1-ba8f1e63312c",
+      "name": "Inyarwanda API Key"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        540,
+        20
+      ],
+      "id": "6719937f-5458-4ef5-a12b-f581cff84a3c",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "url": "https://yegob.rw/wp-json/wp/v2/posts?per_page=100",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        540,
+        -460
+      ],
+      "id": "8daace31-85fb-43a5-a79e-9710073cbec7",
+      "name": "Scrap yegob"
+    },
+    {
+      "parameters": {
+        "url": "https://www.kigalitoday.com/amakuru/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        520,
+        -720
+      ],
+      "id": "60f0cb56-51e2-4f8c-8fd2-352f5cac61f9",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fa26fe91-1cec-416a-86c2-ad12980ec8d8",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "67b3ffc8-c465-4ee3-88c4-002534dc5b31",
+              "name": "link",
+              "value": "=https://www.kigalitoday.com/{{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "16a282e9-86d9-490e-b6dd-1adb269308fb",
+              "name": "image",
+              "value": "=https://www.kigalitoday.com/{{ $json.image }}",
+              "type": "string"
+            },
+            {
+              "id": "6f6c7a72-90db-4d61-a144-a8ebfec1888c",
+              "name": "summary",
+              "value": "={{ $json.summary }}",
+              "type": "string"
+            },
+            {
+              "id": "baa6fa69-ad3c-46b7-9278-47f81c9b882e",
+              "name": "source",
+              "value": "kigalitoday",
+              "type": "string"
+            },
+            {
+              "id": "ca6c87c3-d174-4c14-a927-03bd623288fd",
+              "name": "date",
+              "value": "={{ $json.date.replace('|', '').trim() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1420,
+        -720
+      ],
+      "id": "03336dea-6a66-431f-8c0d-d79d593b3569",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6e1cb8d9-bcee-4e15-8e83-fae3f9a69bd6",
+              "name": "title",
+              "value": "={{ $json.title.rendered }}",
+              "type": "string"
+            },
+            {
+              "id": "4fe65a3a-5c83-4755-87b2-df45485cb72b",
+              "name": "link",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "17fa1d27-48d2-46b4-8a19-8175228e6ec8",
+              "name": "summary",
+              "value": "={{ $json.excerpt.rendered }}",
+              "type": "string"
+            },
+            {
+              "id": "ecb65bab-67c7-43fd-93e7-cda2e4d7737b",
+              "name": "date",
+              "value": "={{ $json.date }}",
+              "type": "string"
+            },
+            {
+              "id": "f502a244-fab2-452b-961a-25516729505b",
+              "name": "image",
+              "value": "={{ $json.jetpack_featured_media_url }}",
+              "type": "string"
+            },
+            {
+              "id": "1290186b-843b-4417-818a-1a5293f84daf",
+              "name": "source",
+              "value": "={{ $json.source }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1480,
+        -380
+      ],
+      "id": "ccf2215b-7e7d-4fa6-9179-cf348cc0635d",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2b75566f-62eb-4145-804a-cfef25ef56bd",
+              "name": "source",
+              "value": "umuseke",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        860,
+        -280
+      ],
+      "id": "6ee62605-6107-4077-9396-e4761e2f49db",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2b75566f-62eb-4145-804a-cfef25ef56bd",
+              "name": "source",
+              "value": "yegob",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        860,
+        -460
+      ],
+      "id": "284e1a49-9faa-4c6f-8953-833ee831f55b",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1260,
+        -380
+      ],
+      "id": "5c9fc0b7-586f-4f70-86d6-481f7567b99a",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1940,
+        -340
+      ],
+      "id": "4ee1d866-e3b4-433a-8794-d32158709937",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "keys": {
+          "key": [
+            {
+              "currentKey": "imageUrl",
+              "newKey": "image"
+            },
+            {
+              "currentKey": "publishedAt",
+              "newKey": "date"
+            }
+          ]
+        },
+        "additionalOptions": {}
+      },
+      "type": "n8n-nodes-base.renameKeys",
+      "typeVersion": 1,
+      "position": [
+        760,
+        20
+      ],
+      "id": "6092f61c-adcd-4252-ae74-fcdf57e4e108",
+      "name": "Rename Keys"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8b20195f-aa09-4270-83f3-fa9533fb3536",
+              "name": "link",
+              "value": "=https://inyarwanda.com/rw/amakuru/{{ $json.slug }}",
+              "type": "string"
+            },
+            {
+              "id": "62cdd40d-0478-4b4a-9c20-c1760d983166",
+              "name": "source",
+              "value": "inyarwanda",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "include": "except",
+        "excludeFields": "_id,featured, lang, slug",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        980,
+        20
+      ],
+      "id": "bef69ea2-c77d-4b24-8271-601d0c5239b3",
+      "name": "Edit Fields4"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "articles",
+              "cssSelector": "ul.items.hedSumm li",
+              "returnValue": "html",
+              "returnArray": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        760,
+        -720
+      ],
+      "id": "cf8e1c7f-e26f-418f-87d1-e8dbe31e33b1",
+      "name": "extract main HTML"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "articles",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        980,
+        -720
+      ],
+      "id": "dd742653-4a50-468b-9369-337f129252dc",
+      "name": "extract article items"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "dataPropertyName": "articles",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "title",
+              "cssSelector": "h3.headline a"
+            },
+            {
+              "key": "link",
+              "cssSelector": "h3.headline a",
+              "returnValue": "attribute",
+              "attribute": "=href"
+            },
+            {
+              "key": "image",
+              "cssSelector": ".headline-image img",
+              "returnValue": "attribute",
+              "attribute": "src"
+            },
+            {
+              "key": "summary",
+              "cssSelector": ".summary-container p"
+            },
+            {
+              "key": "date",
+              "cssSelector": "span.article_date",
+              "returnValue": "=text"
+            }
+          ]
+        },
+        "options": {
+          "cleanUpText": true
+        }
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        1200,
+        -720
+      ],
+      "id": "be412d1a-5845-477d-8b88-770a00cbfc77",
+      "name": "extract field for each article"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Scrap umuseke",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Inyarwanda API Key",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Scrap yegob",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Inyarwanda API Key": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "extract main HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrap umuseke": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrap yegob": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Rename Keys",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rename Keys": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields4": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "extract main HTML": {
+      "main": [
+        [
+          {
+            "node": "extract article items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "extract article items": {
+      "main": [
+        [
+          {
+            "node": "extract field for each article",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "extract field for each article": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1479465b-bc6b-4679-9a63-3af9f5d7be47",
+  "meta": {
+    "instanceId": "6a4f73f4c1e7cc4a1e9a89b3e43d3a71e0163a9471061b2e05796077ecf706a7"
+  },
+  "id": "iSDWWFVU2GfyIJCQ",
+  "tags": []
+}
