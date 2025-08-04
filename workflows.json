@@ -6,15 +6,15 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -280,
-        -40
+        -800,
+        688
       ],
-      "id": "974a7fa6-e031-434d-bf39-08ed7cddcee6",
+      "id": "2193b4c9-acb9-4245-a5e3-fb6a80d7f32c",
       "name": "When clicking ‘Execute workflow’"
     },
     {
       "parameters": {
-        "url": "={{ $json.API_BASE_URL }}/api/articles?limit=100",
+        "url": "={{ $json.API_BASE_URL }}/api/articles?limit=10",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -29,24 +29,24 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        300,
-        220
+        240,
+        752
       ],
-      "id": "ed91f057-8f34-4ebf-a16e-15300eed79c6",
+      "id": "1cf06fb9-ff8a-4097-b10a-cd9f5e131bc4",
       "name": "HTTP Request1"
     },
     {
       "parameters": {
-        "url": "https://umuseke.rw/wp-json/wp/v2/posts?per_page=100",
+        "url": "https://umuseke.rw/wp-json/wp/v2/posts?per_page=10",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        540,
-        -220
+        0,
+        496
       ],
-      "id": "cf3d23fe-e1af-4d9f-a70b-8c4bb94cf927",
+      "id": "e7a15d95-d1b8-475d-82a8-dd7216da0ac8",
       "name": "Scrap umuseke"
     },
     {
@@ -57,10 +57,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        60,
-        220
+        0,
+        752
       ],
-      "id": "35abce49-dc7d-4c21-b6d1-ba8f1e63312c",
+      "id": "2fe82198-87b0-4c5e-9f5f-ca1f23c69f31",
       "name": "Inyarwanda API Key"
     },
     {
@@ -71,24 +71,24 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        540,
-        20
+        464,
+        752
       ],
-      "id": "6719937f-5458-4ef5-a12b-f581cff84a3c",
+      "id": "f8f74f41-d8bc-4f25-ad89-41d693203e24",
       "name": "Split Out"
     },
     {
       "parameters": {
-        "url": "https://yegob.rw/wp-json/wp/v2/posts?per_page=100",
+        "url": "https://yegob.rw/wp-json/wp/v2/posts?per_page=10",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        540,
-        -460
+        0,
+        240
       ],
-      "id": "8daace31-85fb-43a5-a79e-9710073cbec7",
+      "id": "a099277a-8174-48fc-856f-c9f8a6db19e0",
       "name": "Scrap yegob"
     },
     {
@@ -99,10 +99,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        520,
-        -720
+        0,
+        0
       ],
-      "id": "60f0cb56-51e2-4f8c-8fd2-352f5cac61f9",
+      "id": "09885936-c1d5-47f2-8dd7-6674ff43fee6",
       "name": "HTTP Request"
     },
     {
@@ -141,7 +141,7 @@
             },
             {
               "id": "ca6c87c3-d174-4c14-a927-03bd623288fd",
-              "name": "date",
+              "name": "publishedAt",
               "value": "={{ $json.date.replace('|', '').trim() }}",
               "type": "string"
             }
@@ -152,10 +152,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1420,
-        -720
+        1072,
+        0
       ],
-      "id": "03336dea-6a66-431f-8c0d-d79d593b3569",
+      "id": "596a2310-13e7-47c9-87be-4a4ae6c87876",
       "name": "Edit Fields"
     },
     {
@@ -182,7 +182,7 @@
             },
             {
               "id": "ecb65bab-67c7-43fd-93e7-cda2e4d7737b",
-              "name": "date",
+              "name": "publishedAt",
               "value": "={{ $json.date }}",
               "type": "string"
             },
@@ -205,83 +205,22 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1480,
-        -380
+        1312,
+        352
       ],
-      "id": "ccf2215b-7e7d-4fa6-9179-cf348cc0635d",
+      "id": "6a2b012e-9528-474a-98f0-5eaafba81d98",
       "name": "Edit Fields1"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "2b75566f-62eb-4145-804a-cfef25ef56bd",
-              "name": "source",
-              "value": "umuseke",
-              "type": "string"
-            }
-          ]
-        },
-        "includeOtherFields": true,
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        860,
-        -280
-      ],
-      "id": "6ee62605-6107-4077-9396-e4761e2f49db",
-      "name": "Edit Fields2"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "2b75566f-62eb-4145-804a-cfef25ef56bd",
-              "name": "source",
-              "value": "yegob",
-              "type": "string"
-            }
-          ]
-        },
-        "includeOtherFields": true,
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        860,
-        -460
-      ],
-      "id": "284e1a49-9faa-4c6f-8953-833ee831f55b",
-      "name": "Edit Fields3"
     },
     {
       "parameters": {},
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        1260,
-        -380
+        832,
+        352
       ],
-      "id": "5c9fc0b7-586f-4f70-86d6-481f7567b99a",
+      "id": "7960cc0a-0f7f-44a5-8bc2-5a66e6101be2",
       "name": "Merge"
-    },
-    {
-      "parameters": {
-        "numberInputs": 3
-      },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3.2,
-      "position": [
-        1940,
-        -340
-      ],
-      "id": "4ee1d866-e3b4-433a-8794-d32158709937",
-      "name": "Merge1"
     },
     {
       "parameters": {
@@ -302,10 +241,10 @@
       "type": "n8n-nodes-base.renameKeys",
       "typeVersion": 1,
       "position": [
-        760,
-        20
+        704,
+        752
       ],
-      "id": "6092f61c-adcd-4252-ae74-fcdf57e4e108",
+      "id": "4b2665b3-8977-4a76-94c9-6f0e92bc154e",
       "name": "Rename Keys"
     },
     {
@@ -334,10 +273,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        980,
-        20
+        928,
+        752
       ],
-      "id": "bef69ea2-c77d-4b24-8271-601d0c5239b3",
+      "id": "9d47e453-d449-422c-ba75-d21cebfdd454",
       "name": "Edit Fields4"
     },
     {
@@ -358,10 +297,10 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
       "position": [
-        760,
-        -720
+        240,
+        0
       ],
-      "id": "cf8e1c7f-e26f-418f-87d1-e8dbe31e33b1",
+      "id": "79897dfd-7037-4ff1-a203-1f1cba6dda1d",
       "name": "extract main HTML"
     },
     {
@@ -372,10 +311,10 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        980,
-        -720
+        464,
+        0
       ],
-      "id": "dd742653-4a50-468b-9369-337f129252dc",
+      "id": "428b4442-d6a1-48d7-9c26-782368909001",
       "name": "extract article items"
     },
     {
@@ -418,11 +357,231 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
       "position": [
-        1200,
-        -720
+        848,
+        0
       ],
-      "id": "be412d1a-5845-477d-8b88-770a00cbfc77",
+      "id": "92ce865f-6079-42ab-a05a-dcf86a25f960",
       "name": "extract field for each article"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-nano",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-NANO"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Task: Based on the article’s title, choose one best-fitting category from the list below.\n\nArticle's title: {{ $json.title }}\n\nCategories:\nTechnology, Health, Sports, Entertainment, Politics, Business, Education, Science, Finance, History, Other (if category doesnt fit others)"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        2576,
+        -160
+      ],
+      "id": "56500d70-d77d-465f-b578-0eb0c8d42c32",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "YbySeNCDcuBQ0WzK",
+          "name": "OpenAi account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "includeOtherFields": true,
+        "include": "selected",
+        "includeFields": "title, summary",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2336,
+        -160
+      ],
+      "id": "d11725b6-1d8c-4bae-9298-4b396453297e",
+      "name": "Edit Fields5"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d15384d6-9882-49f2-ae18-698c32320dc5",
+              "name": "category",
+              "value": "={{ $json.message.content.category }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3472,
+        -176
+      ],
+      "id": "a5b68f16-e232-4c32-982f-986464704ad0",
+      "name": "Edit Fields6"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        4576,
+        336
+      ],
+      "id": "1af6ac62-3306-42d6-adf2-9238f0f29550",
+      "name": "Merge2"
+    },
+    {
+      "parameters": {
+        "jsCode": "const parseDate = (input) => {\n  const now = new Date();\n\n  const formatDate = (date) => date.toISOString().slice(0, 19) + \"Z\";\n\n  if (typeof input !== 'string' || !input.trim()) {\n    return formatDate(now);\n  }\n\n  input = input.trim();\n\n  // \"x seconds ago\"\n  let match = input.match(/^(\\d+)\\s+seconds?\\s+ago$/i);\n  if (match) {\n    const seconds = Number(match[1]);\n    if (!isNaN(seconds)) {\n      return formatDate(new Date(now.getTime() - seconds * 1000));\n    }\n  }\n\n  // \"x minutes ago\"\n  match = input.match(/^(\\d+)\\s+minutes?\\s+ago$/i);\n  if (match) {\n    const minutes = Number(match[1]);\n    if (!isNaN(minutes)) {\n      return formatDate(new Date(now.getTime() - minutes * 60 * 1000));\n    }\n  }\n\n  // \"x hours ago\"\n  match = input.match(/^(\\d+)\\s+hours?\\s+ago$/i);\n  if (match) {\n    const hours = Number(match[1]);\n    if (!isNaN(hours)) {\n      return formatDate(new Date(now.getTime() - hours * 60 * 60 * 1000));\n    }\n  }\n\n  // \"21 July 2025 at 21:04\"\n  match = input.match(/^(\\d{1,2})\\s+([A-Za-z]+)\\s+(\\d{4})\\s+at\\s+(\\d{2}):(\\d{2})$/i);\n  if (match) {\n    const [ , day, monthName, year, hour, minute ] = match;\n    // Build a string parseable by Date.parse in ISO-ish format with UTC indicator\n    // Example: \"21 July 2025 21:04 UTC\"\n    const dateString = `${day} ${monthName} ${year} ${hour}:${minute} UTC`;\n    const parsedTime = Date.parse(dateString);\n    if (!isNaN(parsedTime)) {\n      return formatDate(new Date(parsedTime));\n    }\n  }\n\n  // fallback\n  return formatDate(now);\n};\n\nfor (const item of $input.all()) {\n  item.json.publishedAt = parseDate(item.json.publishedAt);\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1312,
+        0
+      ],
+      "id": "8541ac8a-db2f-4396-b8a3-f2efb6322cc6",
+      "name": "Parse and transform date"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1856,
+        336
+      ],
+      "id": "902cf04d-76cb-4e1e-a375-afe9c702dd86",
+      "name": "Merge all sources"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2b75566f-62eb-4145-804a-cfef25ef56bd",
+              "name": "source",
+              "value": "umuseke",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        352,
+        496
+      ],
+      "id": "7239b2b3-8670-409c-9023-484363dbd9dd",
+      "name": "Field \"source\" added"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2b75566f-62eb-4145-804a-cfef25ef56bd",
+              "name": "source",
+              "value": "yegob",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        352,
+        240
+      ],
+      "id": "34f92a24-4cb2-4761-adf2-be242b35eedb",
+      "name": "source field"
+    },
+    {
+      "parameters": {
+        "maxItems": 10
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        656,
+        0
+      ],
+      "id": "409747ff-9116-41d3-b664-11e59d41316c",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "chatId": "1078325397",
+        "text": "=OpenAi failed to analyze {{ $json.count_title }} articles. check logs to get more informations ",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        3456,
+        160
+      ],
+      "id": "800e5b59-9b48-4d7a-be53-9d579fc1d20a",
+      "name": "Send a text message",
+      "webhookId": "983f0ebc-7733-4aef-a32d-4fa943b8dd00",
+      "executeOnce": false,
+      "credentials": {
+        "telegramApi": {
+          "id": "jFV6TqFbtV8wIdeq",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "field": "title"
+            }
+          ]
+        },
+        "options": {
+          "outputFormat": "singleItem"
+        }
+      },
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1.1,
+      "position": [
+        3200,
+        160
+      ],
+      "id": "30f073d0-346c-4994-a932-a3c37210c29a",
+      "name": "Summarize"
     }
   ],
   "pinData": {},
@@ -490,7 +649,7 @@
       "main": [
         [
           {
-            "node": "Edit Fields2",
+            "node": "Field \"source\" added",
             "type": "main",
             "index": 0
           }
@@ -501,29 +660,7 @@
       "main": [
         [
           {
-            "node": "Edit Fields3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields2": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Edit Fields3": {
-      "main": [
-        [
-          {
-            "node": "Merge",
+            "node": "source field",
             "type": "main",
             "index": 0
           }
@@ -534,7 +671,7 @@
       "main": [
         [
           {
-            "node": "Merge1",
+            "node": "Merge all sources",
             "type": "main",
             "index": 1
           }
@@ -556,7 +693,7 @@
       "main": [
         [
           {
-            "node": "Merge1",
+            "node": "Parse and transform date",
             "type": "main",
             "index": 0
           }
@@ -589,7 +726,7 @@
       "main": [
         [
           {
-            "node": "Merge1",
+            "node": "Merge all sources",
             "type": "main",
             "index": 2
           }
@@ -611,7 +748,7 @@
       "main": [
         [
           {
-            "node": "extract field for each article",
+            "node": "Limit",
             "type": "main",
             "index": 0
           }
@@ -628,16 +765,128 @@
           }
         ]
       ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields6",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Summarize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields5": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields6": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse and transform date": {
+      "main": [
+        [
+          {
+            "node": "Merge all sources",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge all sources": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields5",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Field \"source\" added": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "source field": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "extract field for each article",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarize": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "1479465b-bc6b-4679-9a63-3af9f5d7be47",
+  "versionId": "8cf84688-c78a-4029-9298-f6e4d7207801",
   "meta": {
-    "instanceId": "6a4f73f4c1e7cc4a1e9a89b3e43d3a71e0163a9471061b2e05796077ecf706a7"
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3c2ea3bfb2b9a0fadba96678c4de047659307b19b3f1509db814606403e17045"
   },
-  "id": "iSDWWFVU2GfyIJCQ",
+  "id": "LLN73eEtIj7V3rhy",
   "tags": []
 }
